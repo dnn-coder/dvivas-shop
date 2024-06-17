@@ -1,5 +1,6 @@
-import CuantitySelector from '@/components/product/cuantity-selector/CuantitySelector';
+import QuantitySelector from '@/components/product/quantity-selector/QuantitySelector';
 import SizeSelector from '@/components/product/size-selector/SizeSelector';
+import ProductSlideshow from '@/components/product/slideshow/ProductSlideshow';
 import { title_font } from '@/config/fonts';
 import { initialData } from '@/seed/seed';
 import { notFound } from 'next/navigation';
@@ -21,7 +22,9 @@ export default function CartPage({ params }: Props) {
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
       {/* slideshow */}
 
-      <div className="col-span-1 md:col-span-2 ">Slideshow</div>
+      <div className="col-span-1 md:col-span-2 ">
+        <ProductSlideshow title={product.title} images={product.images} />
+      </div>
 
       {/* detalles */}
       <div className="col-span-1 px-5 ">
@@ -29,19 +32,18 @@ export default function CartPage({ params }: Props) {
           {product.title}
         </h1>
         <p className="text-lg mb-5"> ${product.price} </p>
-        {/* selector tallas */}
 
+        {/* selector tallas */}
         <SizeSelector
           selectedSize={product.sizes[0]}
           availableSizes={product.sizes}
         />
+        {/* selector cantidad */}
+        <QuantitySelector quantity={2} />
         <button className="btn-primary my-5">Agregar al carrito</button>
         {/* decsripcion  */}
         <h3 className="font-bold text-sm">Description</h3>
         <p className="font-light">{product.description}</p>
-
-        {/* selector cantidad */}
-        <CuantitySelector />
 
         {/* button */}
       </div>
