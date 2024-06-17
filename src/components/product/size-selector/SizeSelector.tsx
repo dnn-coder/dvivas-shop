@@ -5,7 +5,7 @@ interface Props {
   selectedSize: Size;
   availableSizes: Size[];
 }
-export default function SizeSelector({ selectedSize, availableSizes }) {
+export default function SizeSelector({ selectedSize, availableSizes }: Props) {
   return (
     <div className="my-5">
       <h3 className="font-bold mb-4">Tallas disponibles</h3>

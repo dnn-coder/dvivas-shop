@@ -1,3 +1,4 @@
+import CuantitySelector from '@/components/product/cuantity-selector/CuantitySelector';
 import SizeSelector from '@/components/product/size-selector/SizeSelector';
 import { title_font } from '@/config/fonts';
 import { initialData } from '@/seed/seed';
@@ -40,6 +41,7 @@ export default function CartPage({ params }: Props) {
         <p className="font-light">{product.description}</p>
 
         {/* selector cantidad */}
+        <CuantitySelector />
 
         {/* button */}
       </div>
