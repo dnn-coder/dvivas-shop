@@ -9,7 +9,7 @@ export default function PageNotFound() {
         <h2 className={`${title_font.className} antialiased text-9xl`}>404</h2>
         <p className="font-semibold text-xl">Whoops! Lo sentimos mucho. </p>
         <p className="font-light">
-          <span>Puedes regresar al </span>
+          <span>Puedes regresar al</span>
           <Link
             href={'/'}
             className="font-normal hover:underline transition-all">

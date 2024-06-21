@@ -1,5 +1,6 @@
 import QuantitySelector from '@/components/product/quantity-selector/QuantitySelector';
 import SizeSelector from '@/components/product/size-selector/SizeSelector';
+import ProductMobileSlideshow from '@/components/product/slideshow/ProductMobileSlideshow';
 import ProductSlideshow from '@/components/product/slideshow/ProductSlideshow';
 import { title_font } from '@/config/fonts';
 import { initialData } from '@/seed/seed';
@@ -20,10 +21,21 @@ export default function CartPage({ params }: Props) {
   }
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
-      {/* slideshow */}
-
+      {/* Mobile slideshow */}
       <div className="col-span-1 md:col-span-2 ">
-        <ProductSlideshow title={product.title} images={product.images} />
+        <ProductMobileSlideshow
+          title={product.title}
+          images={product.images}
+          clasName="block md:hidden"
+        />
+      </div>
+      {/* Desktop slideshow */}
+      <div className="col-span-1 md:col-span-2 ">
+        <ProductSlideshow
+          title={product.title}
+          images={product.images}
+          clasName="hidden md:block"
+        />
       </div>
 
       {/* detalles */}
