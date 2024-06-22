@@ -1,10 +1,14 @@
+export const revalidate = 604800;
+
 import QuantitySelector from '@/components/product/quantity-selector/QuantitySelector';
 import SizeSelector from '@/components/product/size-selector/SizeSelector';
 import ProductMobileSlideshow from '@/components/product/slideshow/ProductMobileSlideshow';
 import ProductSlideshow from '@/components/product/slideshow/ProductSlideshow';
 import { title_font } from '@/config/fonts';
-import { initialData } from '@/seed/seed';
+import { getProductBySlug } from '@/actions/product/get-product-by-slug';
+
 import { notFound } from 'next/navigation';
+import StockLabel from '@/components/product/stock-label/StockLabel';
 
 interface Props {
   params: {
@@ -12,9 +16,12 @@ interface Props {
   };
 }
 
-export default function CartPage({ params }: Props) {
+export default async function CartPage({ params }: Props) {
   const { slug } = params;
-  const product = initialData.products.find(product => product.slug === slug);
+  const product = await getProductBySlug(slug);
+  console.log(product);
+
+  //initialData.products.find(product => product.slug === slug);
 
   if (!product) {
     notFound();
@@ -40,9 +47,15 @@ export default function CartPage({ params }: Props) {
 
       {/* detalles */}
       <div className="col-span-1 px-5 ">
+        {/* Stock  */}
+
+        <StockLabel slug={product.slug} />
+        {/* titulo  */}
         <h1 className={`${title_font.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
+
+        {/* precio  */}
         <p className="text-lg mb-5"> ${product.price} </p>
 
         {/* selector tallas */}
