@@ -1,5 +1,6 @@
 export const revalidate = 604800;
 
+import { Metadata, ResolvingMetadata } from 'next';
 import QuantitySelector from '@/components/product/quantity-selector/QuantitySelector';
 import SizeSelector from '@/components/product/size-selector/SizeSelector';
 import ProductMobileSlideshow from '@/components/product/slideshow/ProductMobileSlideshow';
@@ -9,10 +10,34 @@ import { getProductBySlug } from '@/actions/product/get-product-by-slug';
 
 import { notFound } from 'next/navigation';
 import StockLabel from '@/components/product/stock-label/StockLabel';
+import AddToCard from './ui/AddToCard';
 
 interface Props {
   params: {
     slug: string;
+  };
+}
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+
+  // fetch data
+  const product = await getProductBySlug(slug);
+
+  // optionally access and extend (rather than replace) parent metadata
+  //const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: product?.title ?? 'Producto no encontrado',
+    description: product?.description ?? '',
+    openGraph: {
+      title: product?.title ?? 'Producto no encontrado',
+      description: product?.description ?? '',
+      images: [`/products/${product?.images[1]}`],
+    },
   };
 }
 
@@ -58,14 +83,8 @@ export default async function CartPage({ params }: Props) {
         {/* precio  */}
         <p className="text-lg mb-5"> ${product.price} </p>
 
-        {/* selector tallas */}
-        <SizeSelector
-          selectedSize={product.sizes[0]}
-          availableSizes={product.sizes}
-        />
-        {/* selector cantidad */}
-        <QuantitySelector quantity={2} />
-        <button className="btn-primary my-5">Agregar al carrito</button>
+        <AddToCard product={product} />
+
         {/* decsripcion  */}
         <h3 className="font-bold text-sm">Description</h3>
         <p className="font-light">{product.description}</p>

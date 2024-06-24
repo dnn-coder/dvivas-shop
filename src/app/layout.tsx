@@ -3,7 +3,10 @@ import { inter } from '@/config/fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Dvivas Shop',
+  title: {
+    template: '%s | Dvivas Shop',
+    default: 'Dvivas Shop | Home',
+  },
   description: 'Tienda virtual De productos de moda',
 };
 
