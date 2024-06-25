@@ -11,6 +11,7 @@ import { getProductBySlug } from '@/actions/product/get-product-by-slug';
 import { notFound } from 'next/navigation';
 import StockLabel from '@/components/product/stock-label/StockLabel';
 import AddToCard from './ui/AddToCard';
+import { currencyFormat } from '@/utils';
 
 interface Props {
   params: {
@@ -81,7 +82,7 @@ export default async function CartPage({ params }: Props) {
         </h1>
 
         {/* precio  */}
-        <p className="text-lg mb-5"> ${product.price} </p>
+        <p className="text-lg mb-5"> {currencyFormat(product.price)} </p>
 
         <AddToCard product={product} />
 

@@ -1,9 +1,7 @@
 import Title from '@/components/ui/title/Title';
-import { initialData } from '@/seed/seed';
 import Link from 'next/link';
-import Image from 'next/image';
-import React from 'react';
-import { redirect } from 'next/navigation';
+import { ProductsInCart } from './ui/ProductsInCart';
+import OrderSummary from './ui/OrderSummary';
 
 export default function CartPage() {
   //redirect('/emty');
@@ -20,22 +18,14 @@ export default function CartPage() {
             </Link>
 
             {/* items carrito  */}
+            <ProductsInCart />
           </div>
 
           {/* checkout */}
 
           <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
             <h2 className="text-2xl mb-2">Resumen de Orden</h2>
-            <div className="grid grid-cols-2">
-              <span>No. Producto</span>
-              <span className="text-right">3 Artículos</span>
-              <span>Subtotal</span>
-              <span className="text-right">$ 100</span>
-              <span>Impuestos 19% </span>
-              <span className="text-right">$ 100</span>
-              <span className="mt-5 text-2xl">Total: </span>
-              <span className="mt-5 text-2xl text-right">$ 100</span>
-            </div>
+            <OrderSummary />
             <div className="mt-5 mb-2 w-full">
               <Link
                 href="/checkout/adress"
