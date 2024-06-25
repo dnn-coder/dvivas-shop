@@ -6,18 +6,18 @@ import { useState } from 'react';
 interface Props {
   quantity: number;
 
-  onQuantityChangued: (value: number) => void;
+  onQuantityChanged: (value: number) => void;
 }
 
 export default function CuantitySelector({
   quantity,
-  onQuantityChangued,
+  onQuantityChanged,
 }: Props) {
   //const [count, setCount] = useState(quantity);
 
   const onValueChanged = (value: number) => {
     if (quantity + value < 1) return 1;
-    onQuantityChangued(quantity + value);
+    onQuantityChanged(quantity + value);
   };
 
   return (
