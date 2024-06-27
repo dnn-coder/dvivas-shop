@@ -5,7 +5,6 @@ import QuantitySelector from '@/components/product/quantity-selector/QuantitySel
 import { useState } from 'react';
 import type { Product, CartProduct, Size } from '@/interfaces';
 import { useCartStore } from '@/store';
-import { currencyFormat } from '@/utils';
 
 interface Props {
   product: Product;
@@ -17,7 +16,7 @@ export default function AddToCard({ product }: Props) {
   const [size, setSize] = useState<Size | undefined>();
   const [quantity, setQuantity] = useState<number>(1);
   const [posted, setPosted] = useState(false);
-  
+
   const addToCart = () => {
     setPosted(true);
     if (!size) return;

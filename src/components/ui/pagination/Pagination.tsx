@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { redirect, usePathname, useSearchParams } from 'next/navigation';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
-import { generetePaginationNumbers } from '../../../utils/generatePaginationNumbers';
+import { generetePaginationNumbers } from '@/utils';
 import clsx from 'clsx';
 
 interface Props {

@@ -1,7 +1,7 @@
 'use client';
 
 import { Product } from '@/interfaces/product.interface';
-import { currencyFormat } from '@/utils';
+import { currencyFormat } from '@/utils/currencyFormat';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';

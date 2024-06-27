@@ -1,7 +1,9 @@
 'use client';
 
+import { logout } from '@/actions';
 import { useUIStore } from '@/store/ui/ui-store';
 import clsx from 'clsx';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 import {
@@ -18,6 +20,9 @@ import {
 export default function Sidebar() {
   const isSideMenuOpen = useUIStore(state => state.isSideMenuOpen);
   const closeMenu = useUIStore(state => state.closeSideMenu);
+  const { data: session } = useSession();
+
+  const isAuthenticated = !!session?.user;
 
   return (
     <div>
@@ -62,7 +67,8 @@ export default function Sidebar() {
         {/* menú */}
 
         <Link
-          href="/"
+          href="/profile"
+          onClick={() => closeMenu()}
           className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all">
           <IoPersonOutline size={30} />
           <span className="ml-3 text-xl">Perfil</span>
@@ -75,19 +81,24 @@ export default function Sidebar() {
           <span className="ml-3 text-xl">Ordenes</span>
         </Link>
 
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all">
-          <IoLogInOutline size={30} />
-          <span className="ml-3 text-xl">Ingresar</span>
-        </Link>
+        {isAuthenticated && (
+          <button
+            className="flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+            onClick={() => logout()}>
+            <IoLogOutOutline size={30} />
+            <span className="ml-3 text-xl">Salir</span>
+          </button>
+        )}
 
-        <Link
-          href="/"
-          className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all">
-          <IoLogOutOutline size={30} />
-          <span className="ml-3 text-xl">Salir</span>
-        </Link>
+        {!isAuthenticated && (
+          <Link
+            href="/auth/login"
+            className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+            onClick={() => closeMenu()}>
+            <IoLogInOutline size={30} />
+            <span className="ml-3 text-xl">Ingresar</span>
+          </Link>
+        )}
 
         {/* line Separeitor */}
         <div className="w-full h-px bg-gray-200 my-10" />

@@ -1,8 +1,6 @@
 export const revalidate = 604800;
 
 import { Metadata, ResolvingMetadata } from 'next';
-import QuantitySelector from '@/components/product/quantity-selector/QuantitySelector';
-import SizeSelector from '@/components/product/size-selector/SizeSelector';
 import ProductMobileSlideshow from '@/components/product/slideshow/ProductMobileSlideshow';
 import ProductSlideshow from '@/components/product/slideshow/ProductSlideshow';
 import { title_font } from '@/config/fonts';
@@ -11,7 +9,7 @@ import { getProductBySlug } from '@/actions/product/get-product-by-slug';
 import { notFound } from 'next/navigation';
 import StockLabel from '@/components/product/stock-label/StockLabel';
 import AddToCard from './ui/AddToCard';
-import { currencyFormat } from '@/utils';
+import { currencyFormat } from '@/utils/currencyFormat';
 
 interface Props {
   params: {
@@ -45,7 +43,6 @@ export async function generateMetadata(
 export default async function CartPage({ params }: Props) {
   const { slug } = params;
   const product = await getProductBySlug(slug);
-  console.log(product);
 
   //initialData.products.find(product => product.slug === slug);
 
