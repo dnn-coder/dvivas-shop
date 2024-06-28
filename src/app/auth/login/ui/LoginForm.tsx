@@ -16,7 +16,8 @@ export const LoginForm = () => {
   useEffect(() => {
     if (state === 'Success') {
       //redirect
-      router.replace('/');
+      //router.replace('/');
+      window.location.replace('/');
     }
   }, [state]);
 
