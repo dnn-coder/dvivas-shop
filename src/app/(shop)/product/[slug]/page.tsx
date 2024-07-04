@@ -1,21 +1,25 @@
-export const revalidate = 604800;
+export const revalidate = 604800; //7 días
+import { Metadata, ResolvingMetadata } from "next";
 
-import { Metadata, ResolvingMetadata } from 'next';
-import ProductMobileSlideshow from '@/components/product/slideshow/ProductMobileSlideshow';
-import ProductSlideshow from '@/components/product/slideshow/ProductSlideshow';
-import { title_font } from '@/config/fonts';
-import { getProductBySlug } from '@/actions/product/get-product-by-slug';
+import { notFound } from "next/navigation";
 
-import { notFound } from 'next/navigation';
-import StockLabel from '@/components/product/stock-label/StockLabel';
-import AddToCard from './ui/AddToCard';
-import { currencyFormat } from '@/utils/currencyFormat';
+import { titleFont } from "@/config/fonts";
+import {
+  ProductMobileSlideshow,
+  ProductSlideshow,
+  QuantitySelector,
+  SizeSelector,
+  StockLabel,
+} from "@/components";
+import { getProductBySlug } from "@/actions";
+import { AddToCart } from './ui/AddToCart';
 
 interface Props {
   params: {
     slug: string;
   };
 }
+
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
@@ -27,67 +31,63 @@ export async function generateMetadata(
   const product = await getProductBySlug(slug);
 
   // optionally access and extend (rather than replace) parent metadata
-  //const previousImages = (await parent).openGraph?.images || [];
+  // const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: product?.title ?? 'Producto no encontrado',
-    description: product?.description ?? '',
+    title: product?.title ?? "Producto no encontrado",
+    description: product?.description ?? "",
     openGraph: {
-      title: product?.title ?? 'Producto no encontrado',
-      description: product?.description ?? '',
-      images: [`/products/${product?.images[1]}`],
+      title: product?.title ?? "Producto no encontrado",
+      description: product?.description ?? "",
+      // images: [], // https://misitioweb.com/products/image.png
+      images: [ `/products/${ product?.images[1] }`],
     },
   };
 }
 
-export default async function CartPage({ params }: Props) {
+export default async function ProductBySlugPage({ params }: Props) {
   const { slug } = params;
   const product = await getProductBySlug(slug);
-
-  //initialData.products.find(product => product.slug === slug);
+  console.log(product);
 
   if (!product) {
     notFound();
   }
+
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
-      {/* Mobile slideshow */}
+      {/* Slideshow */}
       <div className="col-span-1 md:col-span-2 ">
+        {/* Mobile Slideshow */}
         <ProductMobileSlideshow
           title={product.title}
           images={product.images}
-          clasName="block md:hidden"
+          className="block md:hidden"
         />
-      </div>
-      {/* Desktop slideshow */}
-      <div className="col-span-1 md:col-span-2 ">
+
+        {/* Desktop Slideshow */}
         <ProductSlideshow
           title={product.title}
           images={product.images}
-          clasName="hidden md:block"
+          className="hidden md:block"
         />
       </div>
 
-      {/* detalles */}
-      <div className="col-span-1 px-5 ">
-        {/* Stock  */}
-
+      {/* Detalles */}
+      <div className="col-span-1 px-5">
         <StockLabel slug={product.slug} />
-        {/* titulo  */}
-        <h1 className={`${title_font.className} antialiased font-bold text-xl`}>
+
+        <h1 className={` ${titleFont.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
 
-        {/* precio  */}
-        <p className="text-lg mb-5"> {currencyFormat(product.price)} </p>
+        <p className="text-lg mb-5">${product.price}</p>
 
-        <AddToCard product={product} />
+        <AddToCart product={ product } />
 
-        {/* decsripcion  */}
-        <h3 className="font-bold text-sm">Description</h3>
+        {/* Descripción */}
+        <h3 className="font-bold text-sm">Descripción</h3>
         <p className="font-light">{product.description}</p>
-
-        {/* button */}
       </div>
     </div>
   );

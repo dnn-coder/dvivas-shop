@@ -1,9 +1,10 @@
-import PageNotFound from '@/components/ui/not-found/PageNotFound';
+import { PageNotFound } from '@/components';
 
-export default function Notfound() {
+
+export default function GenderNotFoundPage() {
+
+
   return (
-    <div>
-      <PageNotFound />
-    </div>
+    <PageNotFound />
   );
 }
