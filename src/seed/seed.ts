@@ -44,8 +44,8 @@ export const initialData: SeedData = {
       role: 'user',
     },
   ],
-  categories: ['Shirts', 'Pants', 'Hoodies', 'Hats'],
 
+  categories: ['Shirts', 'Pants', 'Hoodies', 'Hats'],
   products: [
     {
       description:
@@ -589,7 +589,7 @@ export const initialData: SeedData = {
       inStock: 10,
       price: 30000,
       sizes: ['XS', 'S', 'M'],
-      slug: 'kids_cybertruck_long_sleeve_tee',
+      slug: 'kids_cybertruck000_long_sleeve_tee',
       type: 'shirts',
       tags: ['shirt'],
       title: 'Kids Cybertruck Long Sleeve Tee',

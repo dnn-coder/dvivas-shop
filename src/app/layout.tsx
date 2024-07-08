@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { inter } from "@/config/fonts";
+import type { Metadata } from 'next';
+import { inter } from '@/config/fonts';
 
-import "./globals.css";
-import { Providers } from "@/components";
+import './globals.css';
+import { Providers } from '@/components';
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - Teslo | Shop",
-    default: "Home - Teslo | Shop",
+    template: '%s - Dvivas | Shop',
+    default: 'Home - Dvivas | Shop',
   },
-  description: "Una tienda virtual de productos",
+  description: 'Una tienda virtual de productos 100% originales',
 };
 
 export default function RootLayout({
