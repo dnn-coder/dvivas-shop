@@ -50,7 +50,7 @@ export const TopMenu = () => {
 
       {/* Search, Cart, Menu */}
       <div className="flex items-center">
-        <Link href="/search" className="mx-2">
+        <Link href="#" className="mx-2 ">
           <IoSearchOutline className="w-5 h-5" />
         </Link>
 
